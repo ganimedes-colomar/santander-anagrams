@@ -24,7 +24,10 @@ spec:
           env:
             -
               name: URL
-              value : https://github.com/ganimedes-colomar/santander-anagrams/tree/docker/data/words.txt
+              valueFrom:
+                secretKeyRef:
+                  key: URL
+                  name: anagrams-secret
           image: busybox
           name: anagrams-wget
           volumeMounts:
