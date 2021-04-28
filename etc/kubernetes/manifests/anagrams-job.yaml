@@ -1,0 +1,41 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: anagrams-job
+spec:
+  template:
+    spec:
+      containers:
+        -
+          image: ganimedescolomar/santander-anagrams:latest
+          name: anagrams-job
+          volumeMounts:
+            -
+              mountPath: /data
+              name: anagrams-volume
+              readOnly: true
+      initContainers:
+        -
+          args: {}
+          command:
+            - sh
+            - '-c'
+            - 'set -x; cd /data | wget ${URL}'
+          env:
+            -
+              name: URL
+              value : https://github.com/ganimedes-colomar/santander-anagrams/tree/docker/data/words.txt
+          image: busybox
+          name: anagrams-wget
+          volumeMounts:
+            -
+              mountPath: /data
+              name: anagrams-volume
+              readOnly: false
+      restartPolicy: Never
+      volumes:
+        -
+          name:
+          persistentVolumeClaim:
+            claimName: anagrams-pvc
+            readOnly: false
