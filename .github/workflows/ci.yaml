@@ -15,4 +15,4 @@ jobs:
         run: docker build -t test .
       -
         name: docker run
-        run: docker run -d --name test -v /data:/data test
+        run: docker run -d --name test -v /data/words.txt:/data/words.txt test
