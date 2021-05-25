@@ -29,5 +29,5 @@ jobs:
         run: |
                 while true; do
                         sleep 10;
-                        docker logs ${repository} 2>&1 | grep ${pattern} && break
+                        docker logs ${repository} 2>&1 | grep "${pattern}" && break
                 done;
