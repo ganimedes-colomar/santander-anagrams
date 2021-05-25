@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v2
       -
         name: docker build
-        run: docker build --no-cache -t ${registry}/${user}/${repository}:${tagname} -f ${file}
+        run: docker build --no-cache -t ${registry}/${user}/${repository}:${tagname} -f ${file} .
       -
         name: docker run
         run: docker run --detach --entrypoint python --name ${repository} -v ${PWD}/data:/data ${registry}/${user}/${repository}:${tagname} anagrams.py
